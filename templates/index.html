@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Server Usage Prediction</title>
+  <style>
+    #proactive_text{
+      text-align: center;
+      text-justify: auto;
+      color: rgba(244, 244, 245, 0.719);
+      float: left;
+      margin-left: 33%;
+
+    }
+    body{
+      background:#333;
+      font-family: Raleway; 
+    }
+    #f{
+     margin-top: 7%;
+     margin-left: 80px;
+     float: left;
+     color: white;
+     font-size: 25px;
+ }
+ #chart {
+     float: left;
+     color :white;
+ }
+ #s{
+    margin-top: 21%;
+    margin-left: -93px;
+    float: left;
+    color: white;
+    font-size: 25px;
+ }
+ #overall{
+align-content: center;
+margin-left: 200px;
+ }
+
+  </style>
+   
+  
+</head>
+
+<body>
+    <meta http-equiv="refresh" content="10;URL='/stabilize'">
+    <center> <h2>Servers Predicted Traffic Plot</h2> </center>
+    <div id="overall">
+     <div id="f"><b> Server 1</b></div>
+     <div id = "s"><b>Server 2</b></div>
+  
+      <div id="chart">        
+    </div>    
+    
+  </div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'></script>
+  <script src='http://fb.me/react-with-addons-0.14.6.js'></script>
+  <script src='http://fb.me/react-dom-0.14.6.js'></script>
+  <script src='http://rawgit.com/letrunghieu/6329008ff76b17d500c5/raw/27689792c9da9e6be3c26db588742e3a67a33da1/linked_multiple_chart.js'></script>
+ 
+  <div id="proactive_text">
+   <p id="proactive"> </p>
+
+  </div>
+    <script>
+    
+    
+    
+    var data = []
+
+
+var xa = [{% for item in values %}
+            {{item}}, 
+           {% endfor %}]
+var str=""        
+    
+for(i=1;i<=24;i++)
+{
+   var map = {};
+   map['id'] = i;
+   map['x'] = xa[i-1]; 
+   map['y'] = xa[200-i];
+  if(xa[i-1]>85 && xa[200-i]<85)
+  {
+    str += "<span style='border:2px solid gray ; padding : 10px'>&#10071 Server 1 Usage is likely to <span style='color:Tomato' > exceed </span> at " + i + "th hour so transferring few process to Server 2</span> <br><br>";
+    document.getElementById("proactive").innerHTML = str;
+  }
+  else if(xa[200-i]>85 && xa[i-1]<85)
+  {
+    str += "<span style='border:2px solid gray; padding :10px'>&#10071 Server 2 Usage is likely to <span style='color :Tomato'> exceed </span>  at " + i + "th hour so transferring few process to Server 1</span> <br><br>";
+    document.getElementById("proactive").innerHTML = str;
+  }   
+         
+   data.push(map);
+}            
+
+
+var props = {
+  data: data,
+  width: 800,
+  height: 400,
+  initiated: true,
+  x: function(d) {
+    return d.id;
+  },
+  fieldY: [{
+    name: "x",
+    color: "#FE7F01",
+    type: "BAR_CHART",
+    height : 100
+  },{
+    name: "y",
+    color: "#FE7F01",
+    type: "BAR_CHART",
+    height : 100
+  }]
+};
+
+ReactDOM.render(React.createElement(LinkedMultipleChart, props), document.getElementById('chart'));
+    
+     
+    
+    
+   
+    
+    </script>
+
+
+
+
+</body>
+
+</html>

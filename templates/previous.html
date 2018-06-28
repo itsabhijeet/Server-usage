@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Server Usage Prediction</title>
+  
+ <style>
+
+    @import "https://fonts.googleapis.com/css?family=Raleway";
+* { box-sizing: border-box; }
+body { 
+  margin: 0; 
+  padding: 0; 
+  background: #333;
+  font-family: Raleway; 
+  text-transform: uppercase; 
+  font-size: 11px; 
+}
+h1{ margin: 0; }
+#contactForm { 
+  
+  border: 6px solid salmon; 
+  padding: 2em;
+  width: 400px;
+  text-align: center;
+  background: #fff;
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%)
+  
+}
+input, textarea { 
+  margin: .8em auto;
+  font-family: inherit; 
+  text-transform: inherit; 
+  font-size: inherit;
+  
+  display: block; 
+  width: 280px; 
+  padding: .4em;
+}
+textarea { height: 80px; resize: none; }
+
+.formBtn { 
+  width: 400px;
+  display: inline-block;
+  margin-left: 672px;
+  background: teal;
+  color: #fff;
+  font-weight: 100;
+  font-size: 1.2em;
+  border: none;
+  height: 30px;
+}
+
+
+ #f{
+     margin-top: 7%;
+     margin-left: 80px;
+     float: left;
+     color: white;
+     font-size: 25px;
+ }
+ #chart {
+     float: left;
+     color :white;
+ }
+ #s{
+    margin-top: 21%;
+    margin-left: -120px;
+    float: left;
+    color: white;
+    font-size: 25px;
+ }
+ #overall{
+align-content: center;
+margin-left: 200px;
+ }
+ html *
+{
+   color:white !important;
+}
+ </style> 
+  
+  
+  
+</head>
+
+<body>
+        <center> <h2>Servers Actual Traffic Plot</h2> </center>
+  <div id="overall">
+   <div id="f"><b> Server 1</b></div>
+   <div id = "s"><b>Server 2</b></div>
+
+    <div id="chart">        
+  </div>    
+  
+</div>
+
+
+<button class="formBtn">  <a href="/loading"> TESTING</a></button>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'></script>
+  <script src='http://fb.me/react-with-addons-0.14.6.js'></script>
+  <script src='http://fb.me/react-dom-0.14.6.js'></script>
+  <script src='http://rawgit.com/letrunghieu/6329008ff76b17d500c5/raw/27689792c9da9e6be3c26db588742e3a67a33da1/linked_multiple_chart.js'></script>
+
+  
+
+    <script>
+    
+    
+    
+    var data = []
+
+
+var xa = [{% for item in values %}
+            {{item}}, 
+           {% endfor %}]
+            
+for(i=0;i<50;i++)
+{
+   var map = {};
+   map['id'] = i;
+   map['x'] = xa[i]; 
+   map['y'] = xa[i+50];  
+   data.push(map);
+}            
+
+var props = {
+  data: data,
+  width: 1000,
+  height: 500,
+  initiated: true,
+  x: function(d) {
+    return d.id;
+  },
+  fieldY: [{
+    name: "x",
+    color: "#FE7F01",
+    type: "BAR_CHART",
+    
+  },{
+    name: "y",
+    color: "#FE7F01",
+    type: "BAR_CHART",   
+  }
+  ]
+};
+
+ReactDOM.render(React.createElement(LinkedMultipleChart, props), document.getElementById('chart'));
+    
+     
+    
+    
+    
+    
+    </script>
+
+
+
+
+</body>
+
+</html>

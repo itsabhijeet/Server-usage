@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8" />
+   <title>Chart.js </title>
+ 
+   <!-- import plugin script -->
+   <script src='static/Chart.min.js'></script>
+ 
+</head>
+<body>
+ 
+<h1>Server Usage Handler</h1>
+<!-- bar chart canvas element -->
+<center> <canvas id="chart" width="400" height="200"></canvas>
+         <canvas id="chart1" width="400" height="200"></canvas>
+         <canvas id="chart2" width="400" height="200"></canvas>
+         <canvas id="chart3" width="400" height="200"></canvas>
+</center>
+<p><b><i>Proactive Actions</i></b></p>
+<p id="pro"> </p>
+<script>
+ 
+   // bar chart data
+   var barData = {
+   labels : [{% for item in labels %}
+                  "{{item}}",
+              {% endfor %}],
+   datasets : [
+      {
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            bezierCurve : true,
+            data : [{% for item in values %}
+                      {{item}}, 
+                    {% endfor %}]
+      }]
+   }
+    
+    var temp = [{% for item in values %}
+                      {{item}}, 
+                    {% endfor %}];
+    var text = "";
+    for (i=0; i<temp.length;i++)
+      {
+         if(temp[i] > 1.1)
+           text += 'Usage may exceed at ' + i + 'th hour. Divert next few processes to Other server' + '\n';
+      }               
+
+    Chart.defaults.global.animationSteps = 50;
+    Chart.defaults.global.tooltipYPadding = 16;
+    Chart.defaults.global.tooltipCornerRadius = 0;
+    Chart.defaults.global.tooltipTitleFontStyle = "normal";
+    Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+    Chart.defaults.global.animationEasing = "easeOutBounce";
+    Chart.defaults.global.responsive = false;
+    Chart.defaults.global.scaleLineColor = "black";
+    Chart.defaults.global.scaleFontSize = 16;
+    
+   // get bar chart canvas
+   var mychart = document.getElementById("chart").getContext("2d");
+   var mychart1 = document.getElementById("chart1").getContext("2d");
+   var mychart2 = document.getElementById("chart2").getContext("2d");
+   var mychart3 = document.getElementById("chart3").getContext("2d");
+   steps = 1
+   max = 5
+   // draw bar chart
+   
+    document.getElementById("pro").innerHTML = text;
+   var LineChartDemo = new Chart(mychart).Line(barData, {
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth: Math.ceil(max / steps),
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+       
+   }
+   var LineChartDemo = new Chart(mychart).Line(barData, {
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth: Math.ceil(max / steps),
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+       
+   }
+   var LineChartDemo = new Chart(mychart1).Line(barData, {
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth: Math.ceil(max / steps),
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+       
+   }
+   var LineChartDemo = new Chart(mychart2).Line(barData, {
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth: Math.ceil(max / steps),
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+       
+   }
+  
+  
+  
+  
+  
+  );
+   
+  
+ 
+</script>
+ 
+</body>
+</html>
