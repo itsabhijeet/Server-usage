@@ -12,7 +12,7 @@
 body { 
   margin: 0; 
   padding: 0; 
-  background: #333;
+  background: rgb(171, 255, 255);
   font-family: Raleway; 
   text-transform: uppercase; 
   font-size: 11px; 
@@ -24,7 +24,7 @@ h1{ margin: 0; }
   padding: 2em;
   width: 400px;
   text-align: center;
-  background: #fff;
+  background: black;
   position: fixed;
   top:50%;
   left:50%;
@@ -45,43 +45,50 @@ input, textarea {
 textarea { height: 80px; resize: none; }
 
 .formBtn { 
-  width: 400px;
-  display: inline-block;
-  margin-left: 672px;
-  background: teal;
-  color: #fff;
-  font-weight: 100;
-  font-size: 1.2em;
-  border: none;
-  height: 30px;
+  width: 469px;
+    display: inline-block;
+    margin-left: 531px;
+    background: teal;
+    color: black;
+    font-weight: 100;
+    font-size: 2.1em;
+    border: none;
+    height: 30px;
+    margin-top: 4%;
 }
 
 
  #f{
      margin-top: 7%;
-     margin-left: 80px;
+     margin-left: -9px;
      float: left;
-     color: white;
+     color: black;
      font-size: 25px;
  }
  #chart {
      float: left;
-     color :white;
+     color :black;
  }
  #s{
-    margin-top: 21%;
+    margin-top: 26%;
     margin-left: -120px;
     float: left;
-    color: white;
+    color: black;
     font-size: 25px;
  }
  #overall{
 align-content: center;
 margin-left: 200px;
+margin-top: 4%;
  }
  html *
 {
-   color:white !important;
+   color:black !important;
+}
+
+.zooming-controller{
+  height:0px;
+  width:0px;
 }
  </style> 
   
@@ -90,7 +97,8 @@ margin-left: 200px;
 </head>
 
 <body>
-        <center> <h2>Servers Actual Traffic Plot</h2> </center>
+        <center> <h1 style="margin-top: 3%">  Actual Traffic Plot</h1> </center>
+        <hr>
   <div id="overall">
    <div id="f"><b> Server 1</b></div>
    <div id = "s"><b>Server 2</b></div>
@@ -101,7 +109,7 @@ margin-left: 200px;
 </div>
 
 
-<button class="formBtn">  <a href="/loading"> TESTING</a></button>
+<button class="formBtn">  <a href="/loading" style="text-decoration:none" >Predict Future Traffic</a></button>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'></script>
   <script src='http://fb.me/react-with-addons-0.14.6.js'></script>
   <script src='http://fb.me/react-dom-0.14.6.js'></script>

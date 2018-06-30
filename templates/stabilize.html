@@ -8,38 +8,41 @@
     #proactive_text{
       text-align: center;
       text-justify: auto;
-      color: rgba(244, 244, 245, 0.719);
+      color: black;
       float: left;
       margin-left: 33%;
 
     }
     body{
-      background:#333;
+      background:rgb(171, 255, 255);
       font-family: Raleway; 
     }
     #f{
      margin-top: 7%;
      margin-left: 80px;
      float: left;
-     color: white;
+     color: black;
      font-size: 25px;
  }
  #chart {
      float: left;
-     color :white;
+     color :black;
  }
  #s{
     margin-top: 21%;
     margin-left: -93px;
     float: left;
-    color: white;
+    color: black;
     font-size: 25px;
  }
  #overall{
 align-content: center;
 margin-left: 200px;
  }
-
+.zooming-controller{
+  height:0px;
+  width:0px;
+}
   </style>
    
   
@@ -47,7 +50,8 @@ margin-left: 200px;
 
 <body>
  
-    <center> <h2>Servers Predicted Traffic Plot</h2> </center>
+    <center> <h2>After Traffic Routing Plot</h2> </center>
+    <hr>
     <div id="overall">
      <div id="f"><b> Server 1</b></div>
      <div id = "s"><b>Server 2</b></div>
@@ -86,15 +90,15 @@ for(i=1;i<=24;i++)
   if(xa[i-1]>85 && xa[200-i]<85)
   {
     map['x'] = (xa[i-1]+xa[200-i])/2; 
-   map['y'] = (xa[i-1]+xa[200-i])/2;
-    str += "<span style='border:2px solid gray ; padding : 10px'>&#10071 Server 1 Traffic <span style='color:green' > STABILIZED </span> before the " + i + "th hour </span> <br><br>";
+    map['y'] = (xa[i-1]+xa[200-i])/2;
+    str += "<h2><span style='border:2px solid gray ; padding : 10px'>&#10071 Server 1 Traffic <span style='color:green' > STABILIZED </span> before the " + i + "th hour </span> <br><br></h2>";
     document.getElementById("proactive").innerHTML = str;
   }
   else if(xa[200-i]>85 && xa[i-1]<85)
   {
     map['x'] = (xa[i-1]+xa[200-i])/2; 
    map['y'] = (xa[i-1]+xa[200-i])/2;
-    str += "<span style='border:2px solid gray; padding :10px'>&#10071 Server 2 Traffic  <span style='color :green'> STABILIZED </span> before the " + i + "th hour </span> <br><br>";
+    str += "<h2><span style='border:2px solid gray; padding :10px'>&#10071 Server 2 Traffic  <span style='color :green'> STABILIZED </span> before the " + i + "th hour </span> <br><br></h2>";
     document.getElementById("proactive").innerHTML = str;
   }   
          
