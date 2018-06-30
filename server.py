@@ -13,7 +13,7 @@ def util():
     filename = 'model.pk'
     print("Loading Model")
     loaded_model = None
-    with open(r'C:\users\abhij\Desktop\Amdocs\\' + filename,'rb') as file:
+    with open(filename,'rb') as file:
          loaded_model = pickle.load(file)
 
     print("Doing predictions: ")
@@ -30,7 +30,7 @@ def apicall():
 @app.route('/')
 def home():
      filename = 'actual'
-     with open(r'C:\users\abhij\Desktop\Amdocs\\' + filename,'rb') as file:
+     with open(filename,'rb') as file:
          actualdata = pickle.load(file)
      print("Showing Actual data:")
 
